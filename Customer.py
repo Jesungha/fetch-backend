@@ -42,13 +42,36 @@ class Customer:
         return 200
     
     def spend_balance(self, amount):
-        
-        return 200
+        used_amount = 0
+        returnlist = []
+        while amount > used_amount:
+            if len(self.timestamps) == 0:
+                #need to put it back since transaction is not possible
+                for i in returnlist:
+                    self.balance[i["payer"]] += -i["points"]
+                    self.timestamps.append([i["dt"], i["payer"], -i["points"]])
+                return 400
+            dt, payer, points = self.timestamps[0] # set dt, payer, and points to the first element in the heapq
+            if amount - used_amount >= points:  # if amount is greater than points pop the first element in the heapq
+                used_amount += points
+                heappop(self.timestamps)# pop the first element in the heapq
+                self.balance[payer] -= points
+                tot_point = points
+            else:   
+                self.balance[payer] -= (amount - used_amount)
+                self.timestamps[0] =  [dt, payer, points - (amount - used_amount)]# set 0 to new amount
+                used_amount = amount
+                tot_point = amount - used_amount
+            returnlist.append({"dt": dt, "payer": payer, "points": -tot_point})# return to returnlist
+                
+        return returnlist
     
     def get_balance(self):
-        return 200
+        #return balance
+        return self.balance
     
     def get_customer(self, user_id):
-        return 200
+        
+        return self.user_name
         
         
