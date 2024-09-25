@@ -76,3 +76,7 @@ def balance():
         return jsonify(Customer.get_balance())
     except:
         return jsonify({"error": "error"}), 400
+    
+    
+if __name__ == '__main__':
+    app.run(debug=True, port=5000)
