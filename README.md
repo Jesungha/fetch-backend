@@ -116,7 +116,7 @@ fetch-backend-challenge/
 
     ```
 
-2. /spend__
+2. /spend\
     Method: POST__
     Description: When a user goes to spend their points, they are not aware of what payer their points were added
     through. Because of this, your request body should look like
