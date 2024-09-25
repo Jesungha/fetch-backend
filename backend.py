@@ -4,7 +4,7 @@ from flask import request, jsonify, Response
 from Customer import Customer
 
 app = Flask(__name__)
-
+Customer = Customer(1, "test")
 '''
 
 Call add_balance function from Customer class
@@ -21,8 +21,13 @@ request body:
 @app.route('/add', methods=['POST'])
 
 def add():
-    data = request.get_json()
-    return Response(status=200)
+    try:
+        data = request.get_json()
+        Customer.add_balance(data['payer'], data['points'], data['timestamp'])
+        return Response(status=200)
+    except:
+        return jsonify({"error": "unable to add"}), 400
+    
 
 '''
 
@@ -44,9 +49,11 @@ response body:
 @app.route('/spend', methods=['POST'])
 
 def spend():
-    data = request.get_json()
-    Customer.get_customer(data['user_id']).spend(data['amount'])
-    return Response(status=200)
+    try:
+        data = request.get_json()
+        return jsonify(Customer.spend_balance(data['points']))
+    except:
+        return jsonify({"error": "insufficient balance"}), 400
 
 
 '''
@@ -65,6 +72,7 @@ response body:
 @app.route('/balance', methods=['GET'])
 
 def balance():
-    user_id = request.args.get('user_id')
-    balance = Customer.get_customer(user_id).balance
-    return jsonify({'balance': balance})
+    try:
+        return jsonify(Customer.get_balance())
+    except:
+        return jsonify({"error": "error"}), 400

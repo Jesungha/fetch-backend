@@ -65,6 +65,7 @@ class Customer:
                 self.timestamps[0] =  [dt, payer, points - (amount - used_amount)]# set 0 to new amount
                 used_amount = amount
                 tot_point = amount - used_amount
+            self.money -= tot_point
             returnlist.append({"dt": dt, "payer": payer, "points": -tot_point})# return to returnlist
                 
         return returnlist
@@ -73,8 +74,8 @@ class Customer:
         #return balance
         return self.balance
     
-    def get_customer(self, user_id):
+    def get_customer(self):
         
-        return self.user_name
+        return self
         
         
