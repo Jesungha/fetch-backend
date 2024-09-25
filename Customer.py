@@ -31,6 +31,7 @@ class Customer:
         self.user_id = user_id
         self.timestamps = []
         self.balance = {} #should be a dictionary for fast access
+        self.money = 0
         
     def add_balance(self, payer, points, timestamp):
         if payer in self.balance: # if payer already exists
@@ -38,19 +39,21 @@ class Customer:
         else:   # if payer does not exist
             self.balance[payer] = points
         dt = datetime.strptime(timestamp, "%Y-%m-%dT%H:%M:%SZ")# convert timestamp to datetime object
+        self.money += points
         heappush(self.timestamps, [dt, payer, points])# push timestamp, payer, and points to heapq and sort by time
-        return 200
     
     def spend_balance(self, amount):
         used_amount = 0
         returnlist = []
+        if amount > self.money:
+            return
         while amount > used_amount:
             if len(self.timestamps) == 0:
                 #need to put it back since transaction is not possible
                 for i in returnlist:
                     self.balance[i["payer"]] += -i["points"]
                     self.timestamps.append([i["dt"], i["payer"], -i["points"]])
-                return 400
+                return
             dt, payer, points = self.timestamps[0] # set dt, payer, and points to the first element in the heapq
             if amount - used_amount >= points:  # if amount is greater than points pop the first element in the heapq
                 used_amount += points
