@@ -96,8 +96,8 @@ fetch-backend-challenge/
 
 ## 6. Available API
 
-1. /add 
-    Method = POST
+1. /add__
+    Method = POST__
     Description: When a user has points added, we will use an /add route that accepts a transaction which contains
     how many points will be added, what payer the points will be added through, and the timestamp for when the
     transaction takes place. The request body for this endpoint will look like the following
@@ -107,7 +107,7 @@ fetch-backend-challenge/
         "timestamp" : "2020-11-02T14:00:00Z
     }
 
-    How to call
+    How to call:__
     put in Command line or terminal. You can change -d parameter
     ```Bash
     curl -X POST http://localhost:5000/add \
@@ -116,14 +116,14 @@ fetch-backend-challenge/
 
     ```
 
-2. /spend
-    Method: POST
+2. /spend__
+    Method: POST__
     Description: When a user goes to spend their points, they are not aware of what payer their points were added
     through. Because of this, your request body should look like
 
     {"points" : 5000}
 
-    How to call
+    How to call:__
     put in Command line or terminal. You can change -d parameter
     ```Bash
     curl -X POST http://localhost:5000/spend \
@@ -131,8 +131,8 @@ fetch-backend-challenge/
     -d '{"points": 5000}'
     ```
 
-3. /balance
-    Method: GET
+3. /balance__
+    Method: GET__
     Description: This route should return a map of points the user has in their account based on the payer they were
     added through. This endpoint can be used to see how many points the user has from each payer at any given
     time. Because this is a GET request, there is no need for a request body. This endpoint should always
@@ -145,7 +145,7 @@ fetch-backend-challenge/
     }
     
 
-    How to Call
+    How to Call:__
     put in command line or terminal
     ```Bash
     curl http://localhost:5000/balance
