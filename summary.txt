@@ -1,0 +1,23 @@
+1. Why did you choose the tools, libraries, and language you used for the coding exercise?
+I chose Flask because I have expereince with it and it is a lightweight framework that is easy to use. I also used requests because it is a simple library that is easy to use for making HTTP requests. 
+I used Python because it is a language that I am comfortable with and it is well-suited for web development tasks.
+
+2. What are the advantages and disadvantages of your solution?
+Advantages: 
+- The solution is simple and easy to understand
+- The solution is lightweight and does not require any external dependencies except for Flask and requests
+- The solution is flexible and can be easily extended to support additional functionality
+- The solution's time complexity is O(logn) for insertion becuase using heapq
+
+Disadvantages:
+- The solution have minimal error handling or input validation
+- The solution does not include any tests
+- The solution does not include any logging or monitoring
+- The solution can only handle one user currently
+
+
+3. What has been a favorite school/personal project thus far? What about it that challenged you?
+One of my favorite personal project was a building autonomous RC car that followed line infront of the car. There are robot kits that's easy to make and easy to control, but we used an actual $150 rc car
+and modified it so we could attach a raspberry pi and a camera to it. We used OpenCV to process the images from the camera and used a PID controller to control the steering of the car. We had to control
+the speed of the car and the steering angle to keep the car on the line. Because of the OpenCV processtime, we had to use a separate thread to process the images and control the car and communicate with queue.
+It was challenging because it required a lot of hardware and software integration and it was a lot of fun to see the car drive itself.
