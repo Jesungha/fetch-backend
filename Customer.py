@@ -43,10 +43,11 @@ class Customer:
         heappush(self.timestamps, [dt, payer, points])# push timestamp, payer, and points to heapq and sort by time
     
     def spend_balance(self, amount):
-        used_amount = 0
+        used_amount = 0 # used_amount is the amount of points used so far
         returnlist = []
         if amount > self.money:
-            return
+            print(amount, self.money)
+            return {"error": "insufficient balance"}
         while amount > used_amount:
             if len(self.timestamps) == 0:
                 #need to put it back since transaction is not possible
@@ -61,11 +62,11 @@ class Customer:
                 self.balance[payer] -= points
                 tot_point = points
             else:   
-                self.balance[payer] -= (amount - used_amount)
-                self.timestamps[0] =  [dt, payer, points - (amount - used_amount)]# set 0 to new amount
-                used_amount = amount
-                tot_point = amount - used_amount
-            self.money -= tot_point
+                self.balance[payer] -= (amount - used_amount) # 10000 - 4700 = 5300
+                self.timestamps[0] =  [dt, payer, points - (amount - used_amount)]# set 0 to new amount 10000 - 4700 = 5300
+                tot_point = (amount - used_amount) # = 4700
+                used_amount += (amount - used_amount)
+            self.money -= tot_point 
             returnlist.append({"dt": dt, "payer": payer, "points": -tot_point})# return to returnlist
                 
         return returnlist

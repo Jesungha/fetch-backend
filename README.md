@@ -110,9 +110,7 @@ fetch-backend-challenge/
     How to call:\
     put in Command line or terminal. You can change -d parameter
     ```Bash
-    curl -X POST http://localhost:5000/add 
-    -H "Content-Type: application/json" 
-    -d '{"payer": "DANNON", "points": 300, "timestamp": "2022-10-31T10:00:00Z"}'
+    curl -X POST http://localhost:5000/add -H "Content-Type: application/json" -d "{\"payer\": \"DANNON\", \"points\": 10000, \"timestamp\": \"2022-10-31T10:00:00Z\"}"
 
     ```
 
@@ -126,9 +124,7 @@ fetch-backend-challenge/
     How to call:\
     put in Command line or terminal. You can change -d parameter
     ```Bash
-    curl -X POST http://localhost:5000/spend 
-    -H "Content-Type: application/json" 
-    -d '{"points": 5000}'
+    curl -X POST http://localhost:5000/spend -H "Content-Type: application/json" -d "{\"points\": 5000}"
     ```
 
 3. /balance\

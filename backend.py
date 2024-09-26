@@ -25,8 +25,8 @@ def add():
         data = request.get_json()
         Customer.add_balance(data['payer'], data['points'], data['timestamp'])
         return Response(status=200)
-    except:
-        return jsonify({"error": "unable to add"}), 400
+    except Exception as e:
+        return jsonify({"error": str(e)}), 400
     
 
 '''
