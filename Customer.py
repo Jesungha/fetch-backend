@@ -34,6 +34,12 @@ class Customer:
         self.money = 0
         
     def add_balance(self, payer, points, timestamp):
+        if points < 0:
+            try:
+                self.spend_balance(-points)
+            except:
+                return {"error": "insufficient balance"}
+            return
         if payer in self.balance: # if payer already exists
             self.balance[payer] += points
         else:   # if payer does not exist
