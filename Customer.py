@@ -34,11 +34,11 @@ class Customer:
         self.money = 0
         
     def add_balance(self, payer, points, timestamp):
-        if points < 0:
+        if points < 0:# if given point is negative, spend the balance
             try:
                 self.spend_balance(-points)
             except:
-                return {"error": "insufficient balance"}
+                raise Exception("insufficient balance")
             return
         if payer in self.balance: # if payer already exists
             self.balance[payer] += points
@@ -52,15 +52,14 @@ class Customer:
         used_amount = 0 # used_amount is the amount of points used so far
         returnlist = []
         if amount > self.money:
-            print(amount, self.money)
-            return {"error": "insufficient balance"}
+            raise Exception("insufficient balance")
         while amount > used_amount:
             if len(self.timestamps) == 0:
                 #need to put it back since transaction is not possible
                 for i in returnlist:
                     self.balance[i["payer"]] += -i["points"]
                     self.timestamps.append([i["dt"], i["payer"], -i["points"]])
-                return
+                raise Exception("insufficient balance")
             dt, payer, points = self.timestamps[0] # set dt, payer, and points to the first element in the heapq
             if amount - used_amount >= points:  # if amount is greater than points pop the first element in the heapq
                 used_amount += points
